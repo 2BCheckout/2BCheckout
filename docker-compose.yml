@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  db:
+    build: ./db-2BCheckout/
+    image: mariadb
+    environment:
+      MYSQL_DATABASE: "SBO"
+      MYSQL_ROOT_PASSWORD: "Password123!!"
+    volumes:
+      - ./database/data:/var/lib/mysql
+  backend:
+    build: ./be-2BCheckout/
+    image: backend2bcheckout
+    volumes:
+      - ./be-2BCheckout/seed:/app/seed
+      - ./be-2BCheckout/client:/app/client
+      - ./be-2BCheckout/common:/app/common
+      - ./be-2BCheckout/server:/app/server
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+  frontend:
+    build: ./fe-2BCheckout/
+    image: frontend2bcheckout
+    hostname: backend
+    environment:
+      EBENEZER_API_URL: localhost
+      EBENEZER_API_PORT: 3000
+    volumes:
+      - ./fe-2BCheckout/app:/app/app
+      - ./fe-2BCheckout/gulp:/app/gulp
+      - ./fe-2BCheckout/server:/app/server
+      - ./fe-2BCheckout/test:/app/test
+    ports:
+      - '3001:3001'
+    depends_on:
+      - db
+      - backend
