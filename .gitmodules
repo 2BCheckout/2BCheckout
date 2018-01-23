@@ -1,0 +1,9 @@
+[submodule "db-2BCheckout"]
+	path = db-2BCheckout
+	url = https://github.com/2BCheckout/db-2BCheckout.git
+[submodule "be-2BCheckout"]
+	path = be-2BCheckout
+	url = https://github.com/2BCheckout/be-2BCheckout.git
+[submodule "fe-2BCheckout"]
+	path = fe-2BCheckout
+	url = https://github.com/2BCheckout/fe-2BCheckout.git
